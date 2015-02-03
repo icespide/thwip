@@ -136,8 +136,50 @@ Consider the following markup
 ## z-index scale
 Z-index should never be hardcoded, instead use one of the variables from z-index.less. @z-index-1 - @z-index-9 are the available ranges, @z-index-9 should rarely be needed. This helps us prevent us from losing control of the z-index in our application
 
-## Font-size scale
+**Good**
+```css
+.modal {
+	z-index: @z-index-5;
+}
+```
 
+**Bad**
+```css
+.modal {
+	z-index: 500;
+}
+```
+
+## Font-size scale
+Font sizes should also never be declared directly, this allows us to maintain consistancy and readability accross the application. Font sizes should always use variables from type.less.
+
+```
+ex:
+
+@type-micro
+@type-smallest
+@type-smaller
+@type-small
+@type-base
+@type-large
+@type-larger
+@type-largest
+@type-jumbo
+```
+
+**Good**
+```css
+.nav-item {
+	font-size: @type-base;
+}
+```
+
+**Bad**
+```css
+.nav-item {
+	font-size: 14px;
+}
+```
 ## Units
 
 ## Specificity
