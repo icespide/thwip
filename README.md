@@ -1,7 +1,7 @@
 # thwip
 A CSS style guide for enterprise web applications
 
-## Class names
+## Naming conventions
 When creating new class names, follow these guidelines:
 * lowercase
 * words separated by hyphens
@@ -23,15 +23,18 @@ When creating new class names, follow these guidelines:
 }
 ```
 
+## IDs vs Classes
+You should pretty much avoid using IDs at all costs. ID based CSS cause specificty to become very brittle, and make conflicts very difficult to debug and refactor.
+
 ## Utility Classes
 Rules that you find yourself re-using several times can be pulled out and rewritten as a utility class that can be shared and re-used by other developers. These utility classes should be small in scope and follow strict naming conventions with the prefix "u-".
 ```css
 .u-center {
-    margin:0px auto;
+    margin: 0px auto;
 }
  
 .u-pullLeft {
-    float:left;
+    float: left;
 }
 ```
 
@@ -66,11 +69,11 @@ If you are writing component css, then you shouldn't be nesting to begin with. A
 ```css
 .main-nav {
 	.nav-item {
-		display:block;
+		display: block;
 	}
 
 	.nav-item .sub-nav {
-		display:block;
+		display: block;
 	}
 }
 ```
@@ -79,10 +82,10 @@ If you are writing component css, then you shouldn't be nesting to begin with. A
 ```css
 .main-nav {
 	.nav-item {
-		display:block;
+		display: block;
 
 		.sub-nav {
-			display:block;
+			display: block;
 		}
 	}
 }
@@ -103,21 +106,47 @@ Consider the following markup
 **Good**
 ```css
 .main_section .section_header {
-    font-size:20px;
+    font-size: 20px;
 }
  
 .main_section .section_header.emphasis {
-    font-size:25px;
+    font-size: 25px;
 }
 ```
 
 **Bad**
 ```css
 .main_section .section_header {
-    font-size:20px;
+    font-size: 20px;
 }
  
 .emphasis {
-    font-size:25px !important;
+    font-size: 25px !important;
 }
 ```
+
+## Components
+
+## Comments
+
+## Variables and Mixins
+
+## Formatting
+
+## z-index scale
+Z-index should never be hardcoded, instead use one of the variables from z-index.less. @z-index-1 - @z-index-9 are the available ranges, @z-index-9 should rarely be needed. This helps us prevent us from losing control of the z-index in our application
+
+## Font-size scale
+
+## Units
+
+## Specificity
+
+## Branding
+
+## Folder structure
+
+## Where to put new styles
+
+
+## Bundles
