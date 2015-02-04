@@ -33,7 +33,7 @@ Rules that you find yourself re-using several times can be pulled out and rewrit
     margin: 0px auto;
 }
  
-.u-pullLeft {
+.u-pull-left {
     float: left;
 }
 ```
@@ -126,12 +126,124 @@ Consider the following markup
 ```
 
 ## Components
+You should always try to abstract components so they can be reused. The console has lots of different screens that do many things but should retain a similar look and feel. The reuse of components helps to acheive this consistent look.
+
+When writing new styles try not to think of it in terms of the specific screen you're building. You should instead try to write styles in a way that they can be reused in other parts of the application, because they probably can! A class name like `.smartgroups-tree-nav` has limited uses, where as a name like `.tree-nav` is more generic and could be reused in other screens.
+
+Component styles should have their own individual less file. For example a tree navigation component would have a corresponding tree-nav.less file.
+
+## Namespacing
+When creating reusable CSS components, you should namespace your styles according to your component's name. You should never namespace according to a specific screen or page of the application (this discourages reusability).
+
+**Good**
+```css
+.lg-picker,
+.lg-picker-search,
+.lg-picker-dropdown
+```
+
+**Bad**
+```css
+.lg-picker,
+.settings-lg-picker,
+.profiles-lg-picker
+```
+
+## Scoping to a specific page or screen
+For the most part, pages should be using general component level styles in order to maintain consistency. In some very specific contexts, page level scoping can be useful to override certain generic styles. 
+
+Take care not to over-use page level overrides, also be sure to limit your scoping to one single level of nesting.
+
+```css
+.profiles {
+	.text-input {
+		float:left;
+	}
+}
+```
+
+## Specificity
+As a selector becomes more specific and complex, it's impact on rendering performance grows. Take this style for example:
+
+```css
+div.main-column div.grid table td span a:hover { color:blue; }
+```
+
+Browsers read selectors from right to left. In this example, everyone single <a> on the page would be individually inspected to determine if it resides any of the elements specified. This requires lots of DOM traversal, and can be quit slow on large documents. More information about how specificity affects performance [here](http://csswizardry.com/2011/09/writing-efficient-css-selectors/)
 
 ## Comments
+Less style comments should be used because they'll get compiled out when optimized. Comments should be used to separate sensible groups of styles in a file. Try to stick to the following comment style:
 
-## Variables and Mixins
+**Good**
+```less
+// Modal // --------------------------------------------------
+
+.modal {
+	display:block;
+}
+```
+
+**Bad**
+
+```css
+/* Modal
+ **********************/
+
+ .modal {
+ 	display:block;
+}
+```
 
 ## Formatting
+Style declarations should start on a new line after the selector.
+
+**Good**
+```css
+.nav-item {
+	display:inline-block;
+}
+```
+
+**Bad**
+```css
+.nav-item { display:inline-block; }
+```
+
+Within CSS rules, declarations should always appear on their own line. Do not place multiple declarations on the same line.
+
+**Good**
+```css
+.nav-item {
+	width:100%;
+	height:50px;
+	display:block;
+}
+```
+
+**Bad**
+```css
+.nav-item {
+	width:100%; height:50px; display:block;
+}
+```
+
+If you have to use multiple selectors in a rule, place each selector on a new line. Do not place multiple selectors on the same line.
+
+**Good**
+```css
+.nav-item,
+.nav-link,
+.nav-button {
+	display:inline-block;
+}
+```
+
+**Bad**
+```css
+.nav-item, .nav-link, .nav-button {
+	display:inline-block;
+}
+```
 
 ## z-index scale
 Z-index should never be hardcoded, instead use one of the variables from z-index.less. @z-index-1 - @z-index-9 are the available ranges, @z-index-9 should rarely be needed. This helps us prevent us from losing control of the z-index in our application
@@ -180,9 +292,10 @@ ex:
 	font-size: 14px;
 }
 ```
-## Units
 
-## Specificity
+## Variables and Mixins
+
+## Colors
 
 ## Branding
 
