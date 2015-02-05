@@ -26,6 +26,28 @@ When creating new class names, follow these guidelines:
 ## IDs vs Classes
 You should pretty much avoid using IDs at all costs. ID based CSS cause specificty to become very brittle, and make conflicts very difficult to debug and refactor.
 
+## Classes over elements
+Avoid styling HTML elements directly. Instead prefer class names for selections. This may seem cumbersome initially, but it gives us lots of flexibility for future reusability. You should especially avoid tightly coupling class names to html elements
+
+**Good**
+```css
+.nav .nav-item {
+	display:inline-block;
+}
+```
+
+**Bad**
+```css
+.nav a {
+	display:block;
+}
+```
+
+**Bad**
+```css
+.nav a.nav-item
+```
+
 ## Utility Classes
 Rules that you find yourself re-using several times can be pulled out and rewritten as a utility class that can be shared and re-used by other developers. These utility classes should be small in scope and follow strict naming conventions with the prefix "u-".
 ```css
@@ -128,7 +150,7 @@ Consider the following markup
 ## Components
 You should always try to abstract components so they can be reused. The console has lots of different screens that do many things but should retain a similar look and feel. The reuse of components helps to acheive this consistent look.
 
-When writing new styles try not to think of it in terms of the specific screen you're building. You should instead try to write styles in a way that they can be reused in other parts of the application, because they probably can! A class name like `.smartgroups-tree-nav` has limited uses, where as a name like `.tree-nav` is more generic and could be reused in other screens.
+When writing new styles try not to think of it in terms of the specific screen you're building. You should instead try to write styles in a way that they can be reused in other parts of the application, because they probably can! A class name like `.smartgroups-tree-nav` has limited uses, whereas a name like `.tree-nav` is more generic and could be reused in other screens.
 
 Component styles should have their own individual less file. For example a tree navigation component would have a corresponding tree-nav.less file.
 
@@ -152,7 +174,7 @@ When creating reusable CSS components, you should namespace your styles accordin
 ## Scoping to a specific page or screen
 For the most part, pages should be using general component level styles in order to maintain consistency. In some very specific contexts, page level scoping can be useful to override certain generic styles. 
 
-Take care not to over-use page level overrides, also be sure to limit your scoping to one single level of nesting.
+Take care not to overuse page level overrides, also be sure to limit your scoping to one single level of nesting.
 
 ```css
 .profiles {
